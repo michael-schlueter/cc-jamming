@@ -1,10 +1,82 @@
-import './App.css'
+import "./App.css";
 
-function App() {
-  
-  return (
-    <div>Hello World</div>
-  )
+import Playlist from "../Playlist/Playlist";
+import SearchBar from "../SearchBar/SearchBar";
+import SearchResults from "../SearchResults/SearchResults";
+import Spotify from "../../util/Spotify";
+import { useCallback, useState } from "react";
+
+interface Track {
+  id: string;
+  name: string;
+  artist: string;
+  album: string;
+  uri: string;
 }
 
-export default App
+function App() {
+  const [searchResults, setSearchResults] = useState<string[]>([]);
+  const [playlistName, setPlaylistName] = useState("New Playlist");
+  const [playlistTracks, setPlaylistTracks] = useState<Track[]>([]);
+
+  const search = useCallback((term: string) => {
+    Spotify.search(term).then(setSearchResults);
+  }, []);
+
+  const addTrack = useCallback(
+    (track: Track) => {
+      if (
+        playlistTracks.some((playlistTrack) => playlistTrack.id === track.id)
+      ) {
+        return;
+      }
+      const nextPlaylistTracks = [...playlistTracks, track];
+      setPlaylistTracks(nextPlaylistTracks);
+    },
+    [playlistTracks]
+  );
+
+  const removeTrack = useCallback(
+    (track: Track) => {
+      setPlaylistTracks(
+        playlistTracks.filter((playlistTrack) => playlistTrack.id !== track.id)
+      );
+    },
+    [playlistTracks]
+  );
+
+  const updatePlaylistName = useCallback((name: string) => {
+    setPlaylistName(name);
+  }, []);
+
+  const savePlaylist = useCallback(() => {
+    const trackUris = playlistTracks.map((track) => track.uri);
+    Spotify.savePlaylist(playlistName, trackUris)?.then(() => {
+      setPlaylistName("New Playlist");
+      setPlaylistTracks([]);
+    });
+  }, [playlistTracks, playlistName]);
+
+  return (
+    <div>
+      <h1>
+        Ja<span className="highlight">mmm</span>ing
+      </h1>
+      <div className="App">
+        <SearchBar onSearch={search} />
+        <div className="App-playlist">
+          <SearchResults searchResults={searchResults} onAdd={addTrack} />
+          <Playlist
+            playlistName={playlistName}
+            playlistTracks={playlistTracks}
+            onNameChange={updatePlaylistName}
+            onRemove={removeTrack}
+            onSave={savePlaylist}
+          />
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export default App;
