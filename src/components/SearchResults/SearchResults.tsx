@@ -1,4 +1,4 @@
-import '.SearchResults.css';
+import './SearchResults.css';
 import TrackList from '../TrackList/TrackList';
 interface Track {
     id: string;

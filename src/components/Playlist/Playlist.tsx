@@ -1,4 +1,4 @@
-import ".Playlist.css";
+import "./Playlist.css";
 import TrackList from "../TrackList/TrackList";
 
 interface Track {

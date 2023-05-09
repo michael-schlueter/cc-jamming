@@ -1,4 +1,4 @@
-import ".TrackList.css";
+import "./TrackList.css";
 import Track from "../Track/Track";
 
 interface ITrack {

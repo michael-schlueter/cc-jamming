@@ -1,4 +1,4 @@
-import ".Track.css";
+import "./Track.css";
 
 interface Track {
     id: string;
