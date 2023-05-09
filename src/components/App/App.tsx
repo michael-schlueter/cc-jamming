@@ -15,7 +15,7 @@ interface Track {
 }
 
 function App() {
-  const [searchResults, setSearchResults] = useState<string[]>([]);
+  const [searchResults, setSearchResults] = useState<Track[]>([]);
   const [playlistName, setPlaylistName] = useState("New Playlist");
   const [playlistTracks, setPlaylistTracks] = useState<Track[]>([]);
 
