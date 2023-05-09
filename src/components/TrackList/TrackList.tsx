@@ -1,7 +1,7 @@
 import ".TrackList.css";
 import Track from "../Track/Track";
 
-interface Track {
+interface ITrack {
     id: string;
     name: string;
     artist: string;
@@ -9,10 +9,10 @@ interface Track {
     uri: string;
   }
 interface TrackListProps {
-    tracks: Track[];
-    onAdd?: (track: Track) => void;
+    tracks: ITrack[];
+    onAdd: (track: ITrack) => void;
     isRemoval?: boolean;
-    onRemove?: (track: Track) => void;
+    onRemove?: (track: ITrack) => void;
 }
 
 function TrackList({ tracks, isRemoval, onRemove, onAdd }: TrackListProps) {
