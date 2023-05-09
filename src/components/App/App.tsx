@@ -71,6 +71,7 @@ function App() {
             onNameChange={updatePlaylistName}
             onRemove={removeTrack}
             onSave={savePlaylist}
+            onAdd={addTrack}
           />
         </div>
       </div>
