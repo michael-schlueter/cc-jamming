@@ -1,0 +1,4 @@
+- Fix styling: Results & Playlistcontainer responsiv machen
+- Fix styling: Backgroundimage lokal abrufen anstatt via url
+- Types in Spotify.ts Util hinzufügen / Typeerror beseitigen
+- Problem beim ersten Suchen beheben (Warum Re-Render?)
