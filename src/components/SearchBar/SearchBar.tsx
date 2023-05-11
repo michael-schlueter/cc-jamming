@@ -1,4 +1,4 @@
-import { useState, useCallback } from "react";
+import { useState } from "react";
 import "./SearchBar.css";
 
 interface SearchBarProps {
@@ -8,20 +8,21 @@ interface SearchBarProps {
 function SearchBar({ onSearch }: SearchBarProps) {
   const [searchTerm, setSearchTerm] = useState("");
 
-  const search = useCallback(() => {
+  const handleSearch = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
     onSearch(searchTerm);
-  }, [searchTerm, onSearch]);
+  };
 
   return (
-    <div className="SearchBar">
+    <form className="SearchBar" onSubmit={handleSearch}>
       <input
         placeholder="Enter A Song Title"
         onChange={(event) => setSearchTerm(event.target.value)}
       />
-      <button className="SearchButton" onClick={search}>
+      <button type="submit" className="SearchButton">
         SEARCH
       </button>
-    </div>
+    </form>
   );
 }
 
