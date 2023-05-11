@@ -1,13 +1,20 @@
 const clientId = "fbbc545b6e264ae5b07b25bad0c222d8"; // Insert client ID here.
 const redirectUri = "http://localhost:3000/"; // Have to add this to your accepted Spotify redirect URIs on the Spotify API.
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore
-let accessToken;
+let accessToken: string;
+
+interface Artist {
+  name: string;
+}
+interface Track {
+  id: string;
+  name: string;
+  artists: Artist[];
+  album: { name: string };
+  uri: string;
+}
 
 const Spotify = {
   getAccessToken() {
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore
     if (accessToken) {
       return accessToken;
     }
@@ -18,15 +25,11 @@ const Spotify = {
       accessToken = accessTokenMatch[1];
       const expiresIn = Number(expiresInMatch[1]);
       window.setTimeout(() => (accessToken = ""), expiresIn * 1000);
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      // @ts-ignore
-      window.history.pushState("Access Token", null, "/"); // This clears the parameters, allowing us to grab a new access token when it expires.
+      window.history.pushState("Access Token", '', "/"); // This clears the parameters, allowing us to grab a new access token when it expires.
       return accessToken;
     } else {
       const accessUrl = `https://accounts.spotify.com/authorize?client_id=${clientId}&response_type=token&scope=playlist-modify-public&redirect_uri=${redirectUri}`;
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      // @ts-ignore
-      window.location = accessUrl;
+      window.location.href = accessUrl;
     }
   },
 
@@ -44,9 +47,7 @@ const Spotify = {
         if (!jsonResponse.tracks) {
           return [];
         }
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        // @ts-ignore
-        return jsonResponse.tracks.items.map((track) => ({
+        return jsonResponse.tracks.items.map((track: Track) => ({
           id: track.id,
           name: track.name,
           artist: track.artists[0].name,
@@ -56,18 +57,14 @@ const Spotify = {
       });
   },
 
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-  // @ts-ignore
-  savePlaylist(name, trackUris) {
+  savePlaylist(name: string, trackUris: string[]) {
     if (!name || !trackUris.length) {
       return;
     }
 
     const accessToken = Spotify.getAccessToken();
     const headers = { Authorization: `Bearer ${accessToken}` };
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore
-    let userId;
+    let userId: string;
 
     return fetch("https://api.spotify.com/v1/me", { headers: headers })
       .then((response) => response.json())
@@ -82,8 +79,6 @@ const Spotify = {
           .then((jsonResponse) => {
             const playlistId = jsonResponse.id;
             return fetch(
-              // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-              // @ts-ignore
               `https://api.spotify.com/v1/users/${userId}/playlists/${playlistId}/tracks`,
               {
                 headers: headers,
