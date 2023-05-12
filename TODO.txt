@@ -1,3 +1,2 @@
 - Problem beim ersten Suchen beheben (Warum Re-Render?)
 - Styling: Höhenproblem addressieren
-- Nach Speichern der Playlist, Suche & Playlistname resetten
