@@ -11,17 +11,19 @@ interface Track {
 interface PlaylistProps {
     playlistTracks: Track[];
     onNameChange: (name: string) => void;
+    name: string;
     onRemove: (track: Track) => void;
     onSave: () => void;
     onAdd: (track: Track) => void
 }
 
-function Playlist({ playlistTracks, onNameChange, onRemove, onSave, onAdd }: PlaylistProps) {
+function Playlist({ playlistTracks, onNameChange, onRemove, onSave, onAdd, name }: PlaylistProps) {
   return (
     <div className="Playlist">
       <input
         onChange={(event) => onNameChange(event.target.value)}
         defaultValue={"New Playlist"}
+        value={name}
       />
       <TrackList tracks={playlistTracks} isRemoval={true} onRemove={onRemove} onAdd={onAdd} />
       <button className="Playlist-save" onClick={onSave}>

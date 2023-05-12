@@ -54,6 +54,7 @@ function App() {
     Spotify.savePlaylist(playlistName, trackUris)?.then(() => {
       setPlaylistName("New Playlist");
       setPlaylistTracks([]);
+      setSearchResults([]);
     });
   }, [playlistTracks, playlistName]);
 
@@ -68,6 +69,7 @@ function App() {
           <SearchResults searchResults={searchResults} onAdd={addTrack} />
           <Playlist
             playlistTracks={playlistTracks}
+            name={playlistName}
             onNameChange={updatePlaylistName}
             onRemove={removeTrack}
             onSave={savePlaylist}
