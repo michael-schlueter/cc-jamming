@@ -1,5 +1,5 @@
 const clientId = import.meta.env.VITE_CLIENT_ID; // Insert client ID here.
-const redirectUri = "http://localhost:3000/"; // Have to add this to your accepted Spotify redirect URIs on the Spotify API.
+const redirectUri = import.meta.env.VITE_REDIRECT_URI; // Have to add this to your accepted Spotify redirect URIs on the Spotify API.
 let accessToken: string;
 
 interface Artist {

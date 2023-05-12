@@ -1,2 +1,0 @@
-- Problem beim ersten Suchen beheben (Warum Re-Render?)
-- Styling: Höhenproblem addressieren
