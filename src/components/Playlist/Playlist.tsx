@@ -2,30 +2,41 @@ import "./Playlist.css";
 import TrackList from "../TrackList/TrackList";
 
 interface Track {
-    id: string;
-    name: string;
-    artist: string;
-    album: string;
-    uri: string;
-  }
+  id: string;
+  name: string;
+  artist: string;
+  album: string;
+  uri: string;
+}
 interface PlaylistProps {
-    playlistTracks: Track[];
-    onNameChange: (name: string) => void;
-    name: string;
-    onRemove: (track: Track) => void;
-    onSave: () => void;
-    onAdd: (track: Track) => void
+  playlistTracks: Track[];
+  onNameChange: (name: string) => void;
+  name: string;
+  onRemove: (track: Track) => void;
+  onSave: () => void;
+  onAdd: (track: Track) => void;
 }
 
-function Playlist({ playlistTracks, onNameChange, onRemove, onSave, onAdd, name }: PlaylistProps) {
+function Playlist({
+  playlistTracks,
+  onNameChange,
+  onRemove,
+  onSave,
+  onAdd,
+  name,
+}: PlaylistProps) {
   return (
     <div className="Playlist">
       <input
         onChange={(event) => onNameChange(event.target.value)}
-        defaultValue={"New Playlist"}
         value={name}
       />
-      <TrackList tracks={playlistTracks} isRemoval={true} onRemove={onRemove} onAdd={onAdd} />
+      <TrackList
+        tracks={playlistTracks}
+        isRemoval={true}
+        onRemove={onRemove}
+        onAdd={onAdd}
+      />
       <button className="Playlist-save" onClick={onSave}>
         SAVE TO SPOTIFY
       </button>
