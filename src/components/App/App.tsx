@@ -6,7 +6,7 @@ import SearchResults from "../SearchResults/SearchResults";
 import Spotify from "../../util/Spotify";
 import { useCallback, useState } from "react";
 
-interface Track {
+export interface Track {
   id: string;
   name: string;
   artist: string;

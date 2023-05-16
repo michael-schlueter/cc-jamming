@@ -1,18 +1,11 @@
 import "./TrackList.css";
 import Track from "../Track/Track";
-
-interface ITrack {
-    id: string;
-    name: string;
-    artist: string;
-    album: string;
-    uri: string;
-  }
+import { Track as ITrack } from "../App/App";
 interface TrackListProps {
-    tracks: ITrack[];
-    onAdd: (track: ITrack) => void;
-    isRemoval?: boolean;
-    onRemove?: (track: ITrack) => void;
+  tracks: ITrack[];
+  onAdd: (track: ITrack) => void;
+  isRemoval?: boolean;
+  onRemove?: (track: ITrack) => void;
 }
 
 function TrackList({ tracks, isRemoval, onRemove, onAdd }: TrackListProps) {

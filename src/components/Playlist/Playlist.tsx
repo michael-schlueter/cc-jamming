@@ -1,13 +1,7 @@
 import "./Playlist.css";
 import TrackList from "../TrackList/TrackList";
+import { Track } from "../App/App";
 
-interface Track {
-  id: string;
-  name: string;
-  artist: string;
-  album: string;
-  uri: string;
-}
 interface PlaylistProps {
   playlistTracks: Track[];
   onNameChange: (name: string) => void;

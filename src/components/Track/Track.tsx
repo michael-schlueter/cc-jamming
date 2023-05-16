@@ -1,17 +1,11 @@
 import "./Track.css";
+import { Track as ITrack } from "../App/App";
 
-interface Track {
-    id: string;
-    name: string;
-    artist: string;
-    album: string;
-    uri: string;
-  }
 interface TrackProps {
-    track: Track;
-    onAdd: (track: Track) => void;
-    isRemoval: boolean | undefined;
-    onRemove: ((track: Track) => void) | undefined;
+  track: ITrack;
+  onAdd: (track: ITrack) => void;
+  isRemoval: boolean | undefined;
+  onRemove: ((track: ITrack) => void) | undefined;
 }
 
 function Track({ track, onAdd, isRemoval, onRemove }: TrackProps) {
